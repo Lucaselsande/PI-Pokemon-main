@@ -5,6 +5,7 @@ const createPokemon = async(req,res)=>{
 try {
      const {name,height,image,thumbnailImage,hp,attack,defense,specialAttack,specialDefense,speed,weight,type} = req.body
      const newpokemon = await pokemon.findOrCreate({where:{name,height,image,thumbnailImage,hp,attack,defense,specialAttack,specialDefense,speed,weight}})
+     //este bucle es para las relaciones 
      for (let i = 0; i < type.length; i++) {
     const typedb = await TYPE.findOne({where:{name:type[i]}})
     newpokemon[0].addTypes(typedb)

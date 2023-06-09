@@ -8,6 +8,7 @@ const getAllTypes = async (req, res) => {
     try {
     const response = await axios.get(`${URL}`)
     const {results} = response.data
+    //bucle para guardar todos los types en la db
         for (let i = 0; i < results.length; i++) {
             await type.create({name:results[i].name})  
         }

@@ -1,5 +1,5 @@
 
-
+//esta funcion toma la respuesta de la api y filtra la informacion que quiero
 const pokemonAllData = (response)=>{
     
     const {id,name,height,sprites,stats,weight} = response.data

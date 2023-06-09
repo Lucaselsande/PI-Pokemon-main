@@ -6,7 +6,7 @@ const routes = require('./routes/index.js');
 
 
 // require('./db.js');
-
+//no modifique nada aca
 
 const server = express();
 
@@ -26,7 +26,7 @@ server.use((req, res, next) => {
 
 server.use('/', routes);
 
-// conn.sync()
+
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   const status = err.status || 500;

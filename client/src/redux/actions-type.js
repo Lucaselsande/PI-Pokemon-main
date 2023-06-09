@@ -1,0 +1,6 @@
+export const ADD_FAV = 'ADD_FAV'
+export const REMOVE_FAV = 'REMOVE_FAV'
+export const FILTER = 'filterCards'
+export const ORDER = 'orderCards'
+export const AGREGAR = 'agregar'
+export const CREAR = 'crear'
