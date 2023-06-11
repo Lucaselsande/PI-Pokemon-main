@@ -1,7 +1,7 @@
 import { useState } from "react"
-import imagen from '../imagen/imagen.jpg'
+import imagen from '../../imagen/imagen.jpg'
 import { useDispatch } from "react-redux"
-import { crearpj } from "../redux/actions"
+import { crearpj } from "../../redux/actions"
 
 
 

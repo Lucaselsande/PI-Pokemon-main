@@ -1,0 +1,41 @@
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    max-width: 800px; /* Establece el ancho máximo del contenedor */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    padding: 20px; /* Añade un poco de espacio interno al contenedor */
+    
+  }
+  
+  .buttons {
+    display: flex;
+    flex-wrap: wrap; /* Para que los botones se ajusten automáticamente a la siguiente línea */
+    justify-content: center; /* Para centrar los botones horizontalmente */
+    margin-top: 1%;
+  }
+
+
+  .paginationButton {
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 100px; /* Aumenta el valor para hacerlos más redondos */
+    cursor: pointer;
+  }
+  
+  
+  .disabledPaginationButton {
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 20px; /* Aumenta el valor para hacerlos más redondos */
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  
+  .paginationButton:hover {
+      background-color: #ccc;
+    }

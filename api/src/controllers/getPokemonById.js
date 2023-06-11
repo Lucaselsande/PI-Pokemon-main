@@ -9,7 +9,14 @@ const getPokemonById = async (req, res) => {
     try {
         const {id} = req.params
         if(!Number(id)){//esto es para que se fije si es id sacado de la api o de la db
-        const dbPokemon = await pokemon.findOne({where:{id}})
+        const dbPokemon = await pokemon.findOne({where:{id},
+            include: {
+              model: type,
+              attributes: ["name"],
+              through: {
+                attributes: []
+              }
+          }})
         return res.status(200).json(dbPokemon)  // los return para que corten
         }
     

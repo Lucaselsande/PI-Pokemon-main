@@ -1,7 +1,7 @@
 import { connect, useDispatch } from 'react-redux'
-import Card from './Card';
-import style from './styles/Todos.module.css'
-import { filterCards, orderCards } from '../redux/actions';
+import Card from '../Card/Card';
+import style from '../styles/Todos.module.css'
+import { filterCards, orderCards } from '../../redux/actions';
 import { useState } from "react";
 
 

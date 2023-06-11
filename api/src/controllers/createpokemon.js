@@ -9,7 +9,7 @@ try {
      for (let i = 0; i < type.length; i++) {
     const typedb = await TYPE.findOne({where:{name:type[i]}})
     newpokemon[0].addTypes(typedb)
-     }
+    }
      
     res.status(200).json(newpokemon)
 } catch (error) {

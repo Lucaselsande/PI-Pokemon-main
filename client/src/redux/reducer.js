@@ -1,4 +1,4 @@
-import { ADD_FAV, REMOVE_FAV, FILTER, ORDER, CREAR } from "./actions-type";
+import { ADD_FAV, REMOVE_FAV, FILTER, ORDER, CREAR,ALL_POKEMONS,REMOVE_POKEMON } from "./actions-type";
 
 
 
@@ -6,12 +6,44 @@ const initialState = {
     myFavorites: [],
     allCharactersFav: [],
     // todos : [],
-    personaje: []
+    personaje: [],
+    allPokemons: [],
+    Pokemons: [],
 }
 
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+
+      case ALL_POKEMONS:
+        return{
+          ...state,
+          allPokemons: action.payload,
+          Pokemons: action.payload
+        };
+
+      case REMOVE_POKEMON:
+        return{
+          ...state,
+          allPokemons: state.allPokemons.filter(elem => elem.id !== action.payload),
+          Pokemons: state.allPokemons.filter(elem => elem.id !== action.payload)
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       case ADD_FAV:
         return { 

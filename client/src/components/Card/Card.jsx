@@ -1,12 +1,12 @@
-import style from './styles/Todos.module.css'
+import style from './Card.module.css'
 import { Link } from 'react-router-dom';
-import { addFav, removeFav } from '../redux/actions';
+import { addFav, removeFav } from '../../redux/actions';
 import { connect } from 'react-redux';
 import { useState, useEffect } from 'react';
 
 
 
-const Card = ({id,name,height,image,thumbnailImage,hp,attack,defense,specialAttack,specialDefense,speed,weight, onClose, addFav, removeFav, myFavorites }) => {
+const Card = ({id,name,height,image,thumbnailImage,hp,attack,defense,specialAttack,specialDefense,speed,weight, onClose,types, addFav, removeFav, myFavorites }) => {
 
    const [isFav, setisFav] = useState(false)
 
@@ -41,18 +41,20 @@ const Card = ({id,name,height,image,thumbnailImage,hp,attack,defense,specialAtta
             )
          }
          {onClose&&<button onClick={() => { onClose(id) }}>Close</button>}
-         <h3>{`name: ${name}`}</h3>
-         <h3>{`height: ${height}`}</h3>
-         <h3>{`hp: ${hp}`}</h3>
+         <Link to={`/deatil/${id}`}>
+            <img src={image} alt='' className={style['card-image']} />
+         </Link>
+         <div className={style['card-name']}>{`Name: ${name}`}</div>
+         
+         {/* <h3>{`height: ${height}`}</h3> */}
+         {/* <h3>{`hp: ${hp}`}</h3>
          <h3>{`attack: ${attack}`}</h3>
          <h3>{`defense: ${defense}`}</h3>
          <h3>{`specialAttack: ${specialAttack}`}</h3>
          <h3>{`specialDefense: ${specialDefense}`}</h3>
          <h3>{`speed: ${speed}`}</h3>
-         <h3>{`weight: ${weight}`}</h3>
-         <Link to={`/deatil/${id}`}>
-            <img src={image} alt='' className={style.imagen} />
-         </Link>
+         <h3>{`weight: ${weight}`}</h3> */}
+         <h4>{`Types: ${types}`}</h4>
 
       </div>
    );
@@ -71,10 +73,6 @@ const mapDispatchToProps = (dispatch) => {
       removeFav: (id) => dispatch(removeFav(id))
    }
 }
-
-
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(
    Card)

@@ -1,5 +1,52 @@
-import { ADD_FAV, REMOVE_FAV , FILTER , ORDER, AGREGAR, CREAR} from "./actions-type";
+import { ADD_FAV, REMOVE_FAV , FILTER , ORDER, AGREGAR, CREAR, POKE_NAME,ALL_POKEMONS,REMOVE_POKEMON} from "./actions-type";
 import axios from "axios";
+
+
+
+
+export const SearchPokeName = (name) => {
+   try {
+      const URL = 'http://localhost:3001/pokemon/?name='+name;
+   return async (dispatch) => {
+     const {data} = await axios.get(URL)
+         return dispatch({
+            type: POKE_NAME,
+            payload: data,
+         });
+      ;
+   };
+} catch (error) {
+   window.alert('No se encontro un pokemon con ese nombre')
+}
+
+};
+
+export const allPokemons = () => {
+   try {
+      const URL = 'http://localhost:3001/pokemon';
+   return async (dispatch) => {
+     const {data} = await axios.get(URL)
+         return dispatch({
+            type: ALL_POKEMONS,
+            payload: data,
+         });
+      ;
+   };
+} catch (error) {
+   window.alert('Error con el server')
+}
+
+};
+
+
+export const removePokemon = (id)=> {
+   return {type: REMOVE_POKEMON, payload: id}
+};
+
+
+
+
+
 // export const addFav = (character) => {
 //     return {
 //         type: ADD_FAV, payload: character
