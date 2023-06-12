@@ -23,10 +23,12 @@ function App() {
 
 
 
-   // 0 que al buscar encuentre al pokemon por nombre exacto
-   // 1 crear los filtros y fijarme como puedo ponerlos del lado izquierdo
+   // 1 crear pokemon
    // 2 favoritos, poner bien el reducer 
-   // 3 crear pokemon
+   // 3 poner el icono de fav y el de cerrar en un mini form
+   // 4 agregar cosas en el about
+   // 5 deployear? no me aucuerdo como se escribe
+
 
    useEffect(() => {
       dispatch(allPokemons())

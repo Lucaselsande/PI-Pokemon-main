@@ -5,6 +5,7 @@ import { allPokemons, closeCard } from '../../redux/actions.js';
 import { useEffect } from 'react';
 import { removePokemon } from '../../redux/actions.js';
 import { useState } from 'react';
+import Filter from '../filter/Filter.jsx';
 
 export default function Cards() {
 
@@ -63,6 +64,7 @@ export default function Cards() {
   {'>'}
 </button>
       </div>
+      <Filter/>
       <div className={style.cards}>
 {itemsToShow?.map(({ id, name, image, types }) => (
         <Card

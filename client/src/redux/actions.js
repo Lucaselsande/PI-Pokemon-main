@@ -2,23 +2,8 @@ import { ADD_FAV, REMOVE_FAV , FILTER , ORDER, AGREGAR, CREAR, POKE_NAME,ALL_POK
 import axios from "axios";
 
 
-
-
 export const SearchPokeName = (name) => {
-   try {
-      const URL = 'http://localhost:3001/pokemon/?name='+name;
-   return async (dispatch) => {
-     const {data} = await axios.get(URL)
-         return dispatch({
-            type: POKE_NAME,
-            payload: data,
-         });
-      ;
-   };
-} catch (error) {
-   window.alert('No se encontro un pokemon con ese nombre')
-}
-
+   return {type: POKE_NAME, payload: name}
 };
 
 export const allPokemons = () => {
@@ -38,11 +23,17 @@ export const allPokemons = () => {
 
 };
 
-
 export const removePokemon = (id)=> {
    return {type: REMOVE_POKEMON, payload: id}
 };
 
+export const filterCards = ({Order, Filter})=> {
+    return {type: FILTER, payload: Order, pepi: Filter}
+};
+
+export const orderCards = (order) =>{
+    return {type: ORDER, payload: order}
+};
 
 
 
@@ -114,13 +105,6 @@ export const removeFav = (id) => {
    
 };
 
-export const filterCards = (gender)=> {
-    return {type: FILTER, payload: gender}
-};
-
-export const orderCards = (order) =>{
-    return {type: ORDER, payload: order}
-};
 
 export const agregarCard = (id) =>{
     return {type: AGREGAR, payload: id}
