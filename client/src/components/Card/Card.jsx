@@ -32,7 +32,7 @@ const Card = ({id,name,height,image,thumbnailImage,hp,attack,defense,specialAtta
    // }, [myFavorites]);
 
    return (
-      <div className={style.card}>
+      <div key={id} className={style.card}>
          {
             isFav ? (
                <button onClick={handleFavorite}>❤️</button>

@@ -64,7 +64,9 @@ export default function Cards() {
   {'>'}
 </button>
       </div>
+
       <Filter/>
+      
       <div className={style.cards}>
 {itemsToShow?.map(({ id, name, image, types }) => (
         <Card

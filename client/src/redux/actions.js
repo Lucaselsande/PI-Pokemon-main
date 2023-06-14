@@ -1,4 +1,4 @@
-import { ADD_FAV, REMOVE_FAV , FILTER , ORDER, AGREGAR, CREAR, POKE_NAME,ALL_POKEMONS,REMOVE_POKEMON} from "./actions-type";
+import { ADD_FAV, REMOVE_FAV , FILTER , ORDER, AGREGAR, CREAR, POKE_NAME,ALL_POKEMONS,REMOVE_POKEMON,ALL_TYPES,NUMBER_TYPES} from "./actions-type";
 import axios from "axios";
 
 
@@ -20,6 +20,22 @@ export const allPokemons = () => {
 } catch (error) {
    window.alert('Error con el server')
 }
+};
+
+export const allTypes = () => {
+   try {
+      const URL = 'http://localhost:3001/types';
+   return async (dispatch) => {
+     const {data} = await axios.get(URL)
+         return dispatch({
+            type: ALL_TYPES,
+            payload: data,
+         });
+      ;
+   };
+} catch (error) {
+   window.alert('Error con el server')
+}
 
 };
 
@@ -27,12 +43,27 @@ export const removePokemon = (id)=> {
    return {type: REMOVE_POKEMON, payload: id}
 };
 
-export const filterCards = ({Order, Filter})=> {
-    return {type: FILTER, payload: Order, pepi: Filter}
+export const filterCards = (filters)=> {
+    return {type: FILTER, payload: filters }
 };
 
 export const orderCards = (order) =>{
     return {type: ORDER, payload: order}
+};
+
+export const createNumberTypes = (number) =>{
+   return {type: NUMBER_TYPES, payload: number}
+};
+
+export const crearPokemon = (pokemonData) => {
+   return async (dispatch) => {
+     try {
+       const { data } = await axios.post('http://localhost:3001/pokemon/', pokemonData);
+       dispatch({ type: CREAR, payload: pokemonData });
+     } catch (error) {
+       console.log(error.message);
+     }
+   };
 };
 
 
@@ -110,9 +141,7 @@ export const agregarCard = (id) =>{
     return {type: AGREGAR, payload: id}
 };
 
-export const crearpj = (personaje) =>{
-   return {type: CREAR, payload: personaje}
-};
+
 
 
 

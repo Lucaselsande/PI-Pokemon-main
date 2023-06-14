@@ -7,3 +7,7 @@ export const CREAR = 'crear'
 export const POKE_NAME = 'pokename'
 export const ALL_POKEMONS = 'allPokemons'
 export const REMOVE_POKEMON = 'removePokemon'
+export const ALL_TYPES = 'alltypes'
+export const NUMBER_TYPES = 'numbertypes'
+
+

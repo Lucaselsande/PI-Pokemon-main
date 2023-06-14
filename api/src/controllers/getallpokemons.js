@@ -23,9 +23,18 @@ const getAllPokemons = async (req, res) => {
                 
         }
         
-        const dbPokemonsFound = await pokemon.findAll();
-       
-        return res.status(200).json([...allPokemonsData,...dbPokemonsFound])  
+        const dbPokemonsFound = await pokemon.findAll({include: {
+            model: type,
+            attributes: ["name"],
+            through: {
+              attributes: []
+            }}});
+            const formattedPokemons = dbPokemonsFound.map(pokemon => ({
+                ...pokemon.toJSON(),
+                types: pokemon.types.map(type => type.name)
+              }));
+        
+        return res.status(200).json([...allPokemonsData,...formattedPokemons])  
         
           
     } catch (error) {

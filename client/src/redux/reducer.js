@@ -1,4 +1,4 @@
-import { ADD_FAV, REMOVE_FAV, FILTER, ORDER, CREAR, ALL_POKEMONS, REMOVE_POKEMON, POKE_NAME } from "./actions-type";
+import { ADD_FAV, REMOVE_FAV, FILTER, ORDER, CREAR, ALL_POKEMONS, REMOVE_POKEMON, POKE_NAME, ALL_TYPES,NUMBER_TYPES } from "./actions-type";
 
 
 
@@ -10,6 +10,8 @@ const initialState = {
   allPokemons: [],
   Pokemons: [],
   PokeSinFiltro: [],
+  allTypes: [],
+  numberTypes:1,
 }
 
 
@@ -23,6 +25,12 @@ const reducer = (state = initialState, action) => {
         Pokemons: action.payload,
         PokeSinFiltro: action.payload
 
+      };
+
+    case ALL_TYPES:
+      return {
+        ...state,
+        allTypes: action.payload
       };
 
     case REMOVE_POKEMON:
@@ -40,41 +48,52 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         Pokemons: pokeName
-      }
-    // case ORDER:
-    //   const allPokemonsCopy = [...state.Pokemons];
-    //   const pokemonOrder = action.payload === 'N'
-    //     ? state.PokeSinFiltro
-    //     : action.payload === "A"
-    //       ? allPokemonsCopy.sort((a, b) => a.name.localeCompare(b.name))
-    //       : allPokemonsCopy.sort((a, b) => b.name.localeCompare(a.name))
-    //   return {
-    //     ...state,
-    //     Pokemons: pokemonOrder,
+      };
 
-    //   }
     case FILTER:
       const PokeSinFiltroCopy = [...state.PokeSinFiltro]
-      console.log(action.pepi)
       let allPokemonsFiltered =
-        action.pepi === 'ALL'
+        action.payload.Filter === 'ALL'
           ? PokeSinFiltroCopy
-          : action.pepi === "API"
+          : action.payload.Filter === "API"
             ? PokeSinFiltroCopy.filter(elem => typeof elem.id === 'number')
             : PokeSinFiltroCopy.filter(elem => typeof elem.id === 'string')
 
       allPokemonsFiltered =
-        action.payload === 'N'
+        action.payload.Order === 'N'
           ? allPokemonsFiltered
-          : action.payload === "A"
+          : action.payload.Order === "A"
             ? allPokemonsFiltered.sort((a, b) => a.name.localeCompare(b.name))
-            : allPokemonsFiltered.sort((a, b) => b.name.localeCompare(a.name))
+            : action.payload.Order === 'D'
+              ? allPokemonsFiltered.sort((a, b) => b.name.localeCompare(a.name))
+              : action.payload.Order === 'Mayor'
+                ? allPokemonsFiltered.sort((a, b) => b.attack - a.attack)
+                : allPokemonsFiltered.sort((a, b) => a.attack - b.attack)
+
+      allPokemonsFiltered =
+        action.payload.Type === 'all'
+          ? allPokemonsFiltered
+          : allPokemonsFiltered.filter(elem => elem.types.includes(action.payload.Type))
 
       // el si es igual a 'ALL' es para no poner ningun filtro
       return {
         ...state,
         Pokemons: allPokemonsFiltered
-      }
+      };
+
+      case NUMBER_TYPES:
+      return {
+        ...state,
+        numberTypes: action.payload
+      };
+
+      case CREAR:
+      return {
+        ...state,
+        allPokemons: [...state.allPokemons, action.payload],
+        Pokemons: [...state.Pokemons, action.payload],
+        PokeSinFiltro: [...state.PokeSinFiltro, action.payload]
+      };
 
 
 
@@ -119,11 +138,7 @@ const reducer = (state = initialState, action) => {
         myFavorites: filter2,
         allCharactersFav: action.payload
       };
-    case CREAR:
-      return {
-        ...state,
-        personaje: [...state.personaje, action.payload]
-      }
+    
 
     default: return {
       ...state

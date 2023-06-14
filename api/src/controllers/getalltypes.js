@@ -8,11 +8,13 @@ const getAllTypes = async (req, res) => {
     try {
     const response = await axios.get(`${URL}`)
     const {results} = response.data
-    //bucle para guardar todos los types en la db
+    let allTypes = []
+    //bucle para guardar todos los types en la db, el findOrCreate es para que no se dupliquen
         for (let i = 0; i < results.length; i++) {
-            await type.create({name:results[i].name})  
+          let elem =  await type.findOrCreate({where:{name:results[i].name}})  
+          allTypes.push(elem[0].name)
         }
-        res.status(200).send('ready')
+        res.status(200).send(allTypes)
    
     } catch (error) {
         res.status(404).send(error.message)

@@ -12,7 +12,7 @@ import Favorites from './components/Favorites/Favorites';
 import Create from './components/Create/create';
 import { useSelector } from 'react-redux';
 import SearchBar from './components/SearchBar/SearchBar';
-import { allPokemons } from './redux/actions';
+import { allPokemons, allTypes } from './redux/actions';
 import { useDispatch } from 'react-redux';
 import { closeCard } from './redux/actions';
 
@@ -23,7 +23,6 @@ function App() {
 
 
 
-   // 1 crear pokemon
    // 2 favoritos, poner bien el reducer 
    // 3 poner el icono de fav y el de cerrar en un mini form
    // 4 agregar cosas en el about
@@ -32,6 +31,7 @@ function App() {
 
    useEffect(() => {
       dispatch(allPokemons())
+      dispatch(allTypes())
     }, [])
 
    return (

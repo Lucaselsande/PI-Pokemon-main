@@ -15,6 +15,12 @@ router.get("/pokemon/:id", getPokemonById);
 router.get("/pokemon", getPokemonHandler);
 router.get("/types", getAllTypes);
 router.delete("/delete/:id", deletePokemon);
+router.options("/pokemon", (req, res) => {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.sendStatus(200);
+  });
 router.post("/pokemon", createPokemon);
 //este .all es para que me mande un error especifico si utilizo cualquier otra ruta no declarada
 router.all('*', (req, res) => {

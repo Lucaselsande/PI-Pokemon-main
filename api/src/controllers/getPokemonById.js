@@ -17,7 +17,13 @@ const getPokemonById = async (req, res) => {
                 attributes: []
               }
           }})
-        return res.status(200).json(dbPokemon)  // los return para que corten
+          //esto quita el .name de types y lo deja mas ordenado
+          const formattedPokemons = dbPokemonsFound.map(pokemon => ({
+            ...pokemon.toJSON(),
+            types: pokemon.types.map(type => type.name)
+          }));
+
+        return res.status(200).json(formattedPokemons)  // los return para que corten
         }
     
         const response = await axios.get(`${URL}${id}`)
