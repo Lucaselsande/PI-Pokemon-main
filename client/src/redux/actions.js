@@ -2,8 +2,21 @@ import { ADD_FAV, REMOVE_FAV , FILTER , ORDER, AGREGAR, CREAR, POKE_NAME,ALL_POK
 import axios from "axios";
 
 
+// return {type: POKE_NAME, payload: name}
 export const SearchPokeName = (name) => {
-   return {type: POKE_NAME, payload: name}
+   try {
+      const URL = 'http://localhost:3001/pokemon/?name=' + name;
+   return async (dispatch) => {
+     const {data} = await axios.get(URL)
+         return dispatch({
+            type: POKE_NAME,
+            payload: data,
+         });
+      ;
+   };
+} catch (error) {
+   window.alert('Error con el server')
+}
 };
 
 export const allPokemons = () => {
@@ -56,15 +69,30 @@ export const createNumberTypes = (number) =>{
 };
 
 export const crearPokemon = (pokemonData) => {
+   
    return async (dispatch) => {
-     try {
-       const { data } = await axios.post('http://localhost:3001/pokemon/', pokemonData);
-       dispatch({ type: CREAR, payload: pokemonData });
+      try {
+         const { data } = await axios.post('http://localhost:3001/pokemon/', pokemonData);
+        return dispatch(allPokemons());
      } catch (error) {
        console.log(error.message);
      }
    };
 };
+
+export const destroy = (id) => {
+   console.log(id)
+   return async (dispatch) => {
+      try {
+         const { data } = await axios.delete(`http://localhost:3001/delete/${id}`);
+         dispatch(removePokemon(id))
+         window.alert('Pokemon destruido definitivamente ')
+     } catch (error) {
+       console.log(error.message);
+     }
+   };
+};
+
 
 
 

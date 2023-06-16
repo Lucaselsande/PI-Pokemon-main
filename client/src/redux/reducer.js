@@ -41,13 +41,9 @@ const reducer = (state = initialState, action) => {
         PokeSinFiltro: state.PokeSinFiltro.filter(elem => elem.id !== action.payload)
       };
     case POKE_NAME:
-      let pokeName = state.allPokemons
-      if (action.payload) {
-        pokeName = pokeName.filter(elem => elem.name === action.payload)
-      }
       return {
         ...state,
-        Pokemons: pokeName
+        Pokemons: action.payload
       };
 
     case FILTER:

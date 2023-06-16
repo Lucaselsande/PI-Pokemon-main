@@ -1,7 +1,7 @@
 import style from './Card.module.css'
 import { Link } from 'react-router-dom';
-import { addFav, removeFav } from '../../redux/actions';
-import { connect } from 'react-redux';
+import { addFav, destroy, removeFav } from '../../redux/actions';
+import { connect, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 
 
@@ -9,7 +9,20 @@ import { useState, useEffect } from 'react';
 const Card = ({id,name,height,image,thumbnailImage,hp,attack,defense,specialAttack,specialDefense,speed,weight, onClose,types, addFav, removeFav, myFavorites }) => {
 
    const [isFav, setisFav] = useState(false)
+   const [destroyPokemon, setdestroy] = useState(false)
 
+   const dispatch = useDispatch()
+
+   useEffect(()=>{
+      if(id){
+         if(typeof id === 'string'){
+            setdestroy(true)
+         }else{
+            setdestroy(false)
+         }
+      }
+
+   },[id])
 
    const handleFavorite = () => {
       if (isFav) {
@@ -21,6 +34,10 @@ const Card = ({id,name,height,image,thumbnailImage,hp,attack,defense,specialAtta
          addFav({ id, name, image })
       }
 
+   }
+
+   const handleDestroy = () => {
+      dispatch(destroy(id))
    }
 
    // useEffect(() => {
@@ -41,6 +58,7 @@ const Card = ({id,name,height,image,thumbnailImage,hp,attack,defense,specialAtta
             )
          }
          {onClose&&<button onClick={() => { onClose(id) }}>Close</button>}
+         {destroyPokemon&& <button onClick={handleDestroy} >DESTROY</button>}
          <Link to={`/deatil/${id}`}>
             <img src={image} alt='' className={style['card-image']} />
          </Link>

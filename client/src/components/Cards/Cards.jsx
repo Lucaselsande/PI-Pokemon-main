@@ -74,7 +74,7 @@ export default function Cards() {
           id={id}
           name={name}
           image={image}
-          types={types}
+          types={types.join(', ')}
           onClose={onClose}
         />
       ))}

@@ -18,7 +18,6 @@ const Deatil = () => {
             });
         return setPokemon({});
     }, [id])
-
     return (
         <div className={style.pokemonDetails}>
             <div className={style.textContainer}>
@@ -31,7 +30,7 @@ const Deatil = () => {
                 <h2>Special Defense: {pokemon.specialDefense}</h2>
                 <h2>Speed: {pokemon.speed}</h2>
                 <h2>Weight: {pokemon.weight}</h2>
-                <h2>Types: {pokemon.types}</h2>
+                <h2>Types: {pokemon.types?.join(', ')}</h2>
             </div>
             <div className={style.imagesContainer}>
                 <img src={pokemon.image} alt='' className={style.pokemonImage} />
