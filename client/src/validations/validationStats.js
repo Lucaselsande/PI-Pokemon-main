@@ -1,5 +1,6 @@
 const validationStats = ({ name, height, hp, attack, defense, specialAttack, specialDefense, speed, weight }) => {
     let statsErr = {}
+    // valido el nombre y los stats
     if (name.length < 3) {
         statsErr[0] = '* mas caracteres'
 

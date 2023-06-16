@@ -1,13 +1,13 @@
-import { ADD_FAV, REMOVE_FAV, FILTER, ORDER, CREAR, ALL_POKEMONS, REMOVE_POKEMON, POKE_NAME, ALL_TYPES, NUMBER_TYPES } from "./actions-type";
+import { ADD_FAV, REMOVE_FAV, FILTER, ALL_POKEMONS, REMOVE_POKEMON, POKE_NAME, ALL_TYPES, NUMBER_TYPES } from "./actions-type";
 
 
 
 const initialState = {
+  Pokemons: [],// la copia en la que voy a hacer los filtros y los que se estan mostrando constantemente
+  PokeSinFiltro: [], // donde tengo todos los pokemons en todo momento
+  allTypes: [], 
   myFavorites: [],
-  Pokemons: [],
-  PokeSinFiltro: [],
-  allTypes: [],
-  numberTypes: 1,
+  numberTypes: 1, // lo utilizo para actualizar una parte de los formularios de creacion 
 }
 
 
@@ -46,6 +46,7 @@ const reducer = (state = initialState, action) => {
     case FILTER:
       const PokeSinFiltroCopy = [...state.PokeSinFiltro]
       let allPokemonsFiltered =
+      // me fijo si el 'id' corresponde al creado o de la api
         action.payload.Filter === 'ALL'
           ? PokeSinFiltroCopy
           : action.payload.Filter === "API"
@@ -53,22 +54,24 @@ const reducer = (state = initialState, action) => {
             : PokeSinFiltroCopy.filter(elem => typeof elem.id === 'string')
 
       allPokemonsFiltered =
+      // si es 'N' no lo ordeno alfabeticamente
         action.payload.Order === 'N'
           ? allPokemonsFiltered
           : action.payload.Order === "A"
             ? allPokemonsFiltered.sort((a, b) => a.name.localeCompare(b.name))
             : action.payload.Order === 'D'
               ? allPokemonsFiltered.sort((a, b) => b.name.localeCompare(a.name))
+              // aca lo ordeno por daño, podria anidar mas condicionales para cualquier tipo de stats
               : action.payload.Order === 'Mayor'
                 ? allPokemonsFiltered.sort((a, b) => b.attack - a.attack)
                 : allPokemonsFiltered.sort((a, b) => a.attack - b.attack)
 
       allPokemonsFiltered =
+      // filtro por type
         action.payload.Type === 'all'
           ? allPokemonsFiltered
           : allPokemonsFiltered.filter(elem => elem.types.includes(action.payload.Type))
 
-      // el si es igual a 'ALL' es para no poner ningun filtro
       return {
         ...state,
         Pokemons: allPokemonsFiltered
@@ -78,13 +81,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         numberTypes: action.payload
-      };
-
-    case CREAR:
-      return {
-        ...state,
-        Pokemons: [...state.Pokemons, action.payload],
-        PokeSinFiltro: [...state.PokeSinFiltro, action.payload]
       };
 
     case ADD_FAV:

@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 
 
-const Card = ({id,name,height,image,thumbnailImage,hp,attack,defense,specialAttack,specialDefense,speed,weight, onClose,types, addFav, removeFav }) => {
+const Card = ({id,name,image, onClose,types, addFav, removeFav }) => {
 
    const [isFav, setisFav] = useState(false)
    const [destroyPokemon, setdestroy] = useState(false)
@@ -22,8 +22,8 @@ const Card = ({id,name,height,image,thumbnailImage,hp,attack,defense,specialAtta
             setdestroy(false)
          }
       }
-
    },[id])
+
    const handleFavorite = () => {
       if (isFav) {
          setisFav(false)
@@ -62,15 +62,6 @@ const Card = ({id,name,height,image,thumbnailImage,hp,attack,defense,specialAtta
             <img src={image} alt='' className={style['card-image']} />
          </Link>
          <div className={style['card-name']}>{`Name: ${name}`}</div>
-         
-         {/* <h3>{`height: ${height}`}</h3> */}
-         {/* <h3>{`hp: ${hp}`}</h3>
-         <h3>{`attack: ${attack}`}</h3>
-         <h3>{`defense: ${defense}`}</h3>
-         <h3>{`specialAttack: ${specialAttack}`}</h3>
-         <h3>{`specialDefense: ${specialDefense}`}</h3>
-         <h3>{`speed: ${speed}`}</h3>
-         <h3>{`weight: ${weight}`}</h3> */}
          <h4>{`Types: ${types}`}</h4>
 
       </div>

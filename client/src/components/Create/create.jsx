@@ -15,7 +15,9 @@ const Create = () => {
   const allTypes = useSelector(state => state.allTypes)
   const numberTypes = useSelector(state => state.numberTypes)
 
+  // declaro la cantidad maxima de types por pokemon
   const numberOfTypes = [1, 2, 3, 4]
+  // asigno la cantidad de types que yo quiera
   let selectedNumber = numberOfTypes.slice(0, numberTypes)
   let aux = 1
   let suma = 1
@@ -44,6 +46,7 @@ const Create = () => {
 
 
   const handlechange = (event) => {
+    // pregunto si se puede convertir a numero por que el event.target.name de types es numero
     if (Number(event.target.name)) {
       settyp({
         ...typ,
@@ -58,6 +61,7 @@ const Create = () => {
   }
 
   useEffect(() => {
+    //valido typ siempre que se actualizan sus valores
     let { errors, arrayTypes } = validationTypes(typ)
     suma = arrayTypes
     setTypeErr(errors)
@@ -65,14 +69,15 @@ const Create = () => {
       ...pokemon,
       type: arrayTypes
     })
-
   }, [typ])
 
   useEffect(() => {
+    // valido los stats del pokemon siempre que cambien
     setStatsErr(validationStats(pokemon))
   }, [pokemon])
 
   useEffect(() => {
+    // estoy atento a los cambios en los errores y los junto si los hay 
     if (Object.keys(typeErr).length === 0 && Object.keys(statsErr).length === 0) {
       setErrors('bien')
     } else {
@@ -85,11 +90,14 @@ const Create = () => {
   }, [statsErr, typeErr])
 
   const handleNumberTypes = (event) => {
+    // a esto le hice un dispatch para que se actualize, trate de hacerlo con un useEfect pero no me fue bien
     dispatch(createNumberTypes(event.target.value))
   }
 
 
   const handleSubmit = async (event) => {
+    // si hay errores no se mandan los datos para crear
+    // si no los hay refresca la pagina para que ya traiga de la db el creado y te redirige a /home
     if (errors !== 'bien') {
       event.preventDefault()
       window.alert('Datos incorrectos')
@@ -175,14 +183,14 @@ const Create = () => {
             <option value={4}>4</option>
           </select>
 
-          {
+          {// muestro la cantidad de selectores de types que yo quiera
             selectedNumber.map(elem => {
 
               return (
                 <div key={elem}>
                   <select name={aux++} onChange={handlechange}>
                     <option value='type'>undefined</option>
-                    {
+                    {// muestro todos los types de pokemons
                       allTypes.map(elem => {
                         return (
                           <option key={elem} value={elem}>{elem}</option>
@@ -195,6 +203,9 @@ const Create = () => {
             }
             )
           }
+          {
+          // si hay errores los muestro
+          }
           <p>{typeErr[0] && typeErr[0]}</p>
           <p>{typeErr[1] && typeErr[1]}</p>
           <p>{typeErr[2] && typeErr[2]}</p>
@@ -203,7 +214,6 @@ const Create = () => {
         </div>
 
         <button type="submit" >Crear pokemon</button>
-        {/* disabled={Object.keys(typeErr).length !== 0} */}
       </form>
 
 

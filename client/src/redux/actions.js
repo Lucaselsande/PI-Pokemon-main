@@ -1,15 +1,17 @@
-import { ADD_FAV, REMOVE_FAV, FILTER, ORDER, AGREGAR, CREAR, POKE_NAME, ALL_POKEMONS, REMOVE_POKEMON, ALL_TYPES, NUMBER_TYPES } from "./actions-type";
+import { ADD_FAV, REMOVE_FAV, FILTER, AGREGAR, CREAR, POKE_NAME, ALL_POKEMONS, REMOVE_POKEMON, ALL_TYPES, NUMBER_TYPES } from "./actions-type";
 import axios from "axios";
 
 
 // return {type: POKE_NAME, payload: name}
 export const SearchPokeName = (name) => {
+   // si en el search no busco ningun pokemon muestro todos
    if (!name) {
       return ({
          type: POKE_NAME,
          payload: 'data',
       });
    }
+   // peticion al server para traer el pokemon
    try {
       const URL = 'http://localhost:3001/pokemon/?name=' + name;
       return async (dispatch) => {
@@ -18,10 +20,9 @@ export const SearchPokeName = (name) => {
             type: POKE_NAME,
             payload: data,
          });
-         ;
       };
    } catch (error) {
-      window.alert('Error con el server')
+      window.alert('Pokemon no encontrado')
    }
 };
 
@@ -34,7 +35,6 @@ export const allPokemons = () => {
             type: ALL_POKEMONS,
             payload: data,
          });
-         ;
       };
    } catch (error) {
       window.alert('Error con el server')
@@ -66,16 +66,11 @@ export const filterCards = (filters) => {
    return { type: FILTER, payload: filters }
 };
 
-export const orderCards = (order) => {
-   return { type: ORDER, payload: order }
-};
-
 export const createNumberTypes = (number) => {
    return { type: NUMBER_TYPES, payload: number }
 };
 
 export const crearPokemon = (pokemonData) => {
-
    return async (dispatch) => {
       try {
          const { data } = await axios.post('http://localhost:3001/pokemon/', pokemonData);
@@ -91,6 +86,7 @@ export const destroy = (id) => {
    return async (dispatch) => {
       try {
          const { data } = await axios.delete(`http://localhost:3001/delete/${id}`);
+         //con la peticion elimino por completo el pokemon de la db y con el dispatch quito la carta
          dispatch(removePokemon(id))
          window.alert('Pokemon destruido definitivamente ')
       } catch (error) {
@@ -100,7 +96,6 @@ export const destroy = (id) => {
 };
 
 export const addFav = (id) => {
-
    return {
       type: ADD_FAV,
       payload: id,
@@ -113,51 +108,3 @@ export const removeFav = (id) => {
       payload: id,
    });
 };
-
-
-// export const addFav = (character) => {
-//     return {
-//         type: ADD_FAV, payload: character
-//     }
-// }
-// export const addFav = (character) => {
-//     const endpoint = 'http://localhost:3001/rickandmorty/fav';
-//     return (dispatch) => {
-//        axios.post(endpoint, character).then(({ data }) => {
-//           return dispatch({
-//              type: ADD_FAV,
-//              payload: data,
-//           });
-//        });
-//     };
-//  };
-
-// export const removeFav = (id) => {
-//     return {
-//         type: REMOVE_FAV, payload: id
-//     }
-// }
-// export const removeFav = (id) => {
-//     const endpoint = 'http://localhost:3001/rickandmorty/fav/' + id;
-//     return (dispatch) => {
-//        axios.delete(endpoint).then(({ data }) => {
-//           return dispatch({
-//              type: REMOVE_FAV,
-//              payload: data,
-//              pepi: id
-//        });
-//        });
-//     };
-//  };
-
-
-
-export const agregarCard = (id) => {
-   return { type: AGREGAR, payload: id }
-};
-
-
-
-
-
-

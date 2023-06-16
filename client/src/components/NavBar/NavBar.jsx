@@ -3,7 +3,7 @@ import SearchBar from '../SearchBar/SearchBar';
 import { Link, NavLink } from 'react-router-dom';
 
 
-const NavBar = ({ onSearch }) => {
+const NavBar = () => {
     return (
         <div className={style.buttonBar}>
             <NavLink to='/About' className={style.navLink}>

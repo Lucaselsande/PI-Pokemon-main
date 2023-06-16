@@ -7,8 +7,11 @@ const Deatil = () => {
     const { id } = useParams();
     const [pokemon, setPokemon] = useState({})
 
+    //traigo el pokemon por id, podria modularizarlo
+
     useEffect(() => {
-        axios(`http://localhost:3001/pokemon/${id}`)
+        try {
+            axios(`http://localhost:3001/pokemon/${id}`)
             .then(({ data }) => {
                 if (data.name) {
                     setPokemon(data);
@@ -16,8 +19,14 @@ const Deatil = () => {
                     window.alert('No hay pokemon con ese ID');
                 }
             });
-        return setPokemon({});
+            return setPokemon({})
+        } catch (error) {
+            window.alert('No hay pokemon con ese ID')
+        }
+        
+        ;
     }, [id])
+    
     return (
         <div className={style.pokemonDetails}>
             <div className={style.textContainer}>

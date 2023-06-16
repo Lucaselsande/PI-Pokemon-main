@@ -18,10 +18,13 @@ export default function Cards() {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
+  // modifico el array de pokemons que vienen del state para solo mostrar los correcpondientes a cada pagina
   const itemsToShow = Pokemons.slice(indexOfFirstItem, indexOfLastItem);
 
+  // el ceil es para que no quede ningun pokemon fuera de las paginas
   const totalPages = Math.ceil(Pokemons.length / itemsPerPage);
 
+  // agrego valores a un array para despues hacer un .map y mostrar una pagina por cada valor
   const pageNumbers = [];
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
@@ -82,29 +85,3 @@ export default function Cards() {
     </div>
   );
 }
-
-
-
-// {pokemons?.map(({id,name,height,image,thumbnailImage,hp,attack,defense,specialAttack,specialDefense,speed,weight}) => {
-//   return (
-  
-//       <Card
-//         key={id}
-//         id={id}
-//         name={name}
-//         height={height}
-//         hp={hp}
-//         attack={attack}
-//         defense={defense}
-//         specialAttack={specialAttack}
-//         specialDefense={specialDefense}
-//         speed={speed}
-//         weight={weight}
-//         image={image}
-//         thumbnailImage={thumbnailImage}
-//         onClose={onClose}
-//       />
-//      ) 
-//    } 
-//    )
-//   } 

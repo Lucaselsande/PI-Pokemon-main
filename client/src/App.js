@@ -4,17 +4,13 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Deatil from './components/Detail/Deatil';
 import About from './components/about/about';
 import Cards from './components/Cards/Cards';
-import { useState } from 'react';
-import axios from 'axios';
 import Form from './components/Form/Form';
 import { useEffect } from 'react';
 import Favorites from './components/Favorites/Favorites';
 import Create from './components/Create/create';
-import { useSelector } from 'react-redux';
 import SearchBar from './components/SearchBar/SearchBar';
 import { allPokemons, allTypes } from './redux/actions';
 import { useDispatch } from 'react-redux';
-import { closeCard } from './redux/actions';
 
 function App() {
    
@@ -27,12 +23,14 @@ function App() {
    // 4 agregar cosas en el about
    // 5 deployear? no me aucuerdo como se escribe
 
+   // uso el useEffect para llenar el estado global con lo que voy a necesitar
 
    useEffect(() => {
       dispatch(allPokemons())
       dispatch(allTypes())
     }, [])
 
+    //con el local.pathname digo que un elemento se muestre donde yo quiero
    return (
       <div>
          {local.pathname !== '/' && <NavBar />}
