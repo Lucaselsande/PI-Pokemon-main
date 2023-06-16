@@ -1,17 +1,13 @@
-import { ADD_FAV, REMOVE_FAV, FILTER, ORDER, CREAR, ALL_POKEMONS, REMOVE_POKEMON, POKE_NAME, ALL_TYPES,NUMBER_TYPES } from "./actions-type";
+import { ADD_FAV, REMOVE_FAV, FILTER, ORDER, CREAR, ALL_POKEMONS, REMOVE_POKEMON, POKE_NAME, ALL_TYPES, NUMBER_TYPES } from "./actions-type";
 
 
 
 const initialState = {
   myFavorites: [],
-  allCharactersFav: [],
-  // todos : [],
-  personaje: [],
-  allPokemons: [],
   Pokemons: [],
   PokeSinFiltro: [],
   allTypes: [],
-  numberTypes:1,
+  numberTypes: 1,
 }
 
 
@@ -21,7 +17,6 @@ const reducer = (state = initialState, action) => {
     case ALL_POKEMONS:
       return {
         ...state,
-        allPokemons: action.payload,
         Pokemons: action.payload,
         PokeSinFiltro: action.payload
 
@@ -36,14 +31,16 @@ const reducer = (state = initialState, action) => {
     case REMOVE_POKEMON:
       return {
         ...state,
-        allPokemons: state.allPokemons.filter(elem => elem.id !== action.payload),
         Pokemons: state.Pokemons.filter(elem => elem.id !== action.payload),
         PokeSinFiltro: state.PokeSinFiltro.filter(elem => elem.id !== action.payload)
       };
     case POKE_NAME:
+      
       return {
         ...state,
-        Pokemons: action.payload
+        Pokemons: action.payload === 'data'
+        ? state.PokeSinFiltro
+        : action.payload
       };
 
     case FILTER:
@@ -77,64 +74,32 @@ const reducer = (state = initialState, action) => {
         Pokemons: allPokemonsFiltered
       };
 
-      case NUMBER_TYPES:
+    case NUMBER_TYPES:
       return {
         ...state,
         numberTypes: action.payload
       };
 
-      case CREAR:
+    case CREAR:
       return {
         ...state,
-        allPokemons: [...state.allPokemons, action.payload],
         Pokemons: [...state.Pokemons, action.payload],
         PokeSinFiltro: [...state.PokeSinFiltro, action.payload]
       };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     case ADD_FAV:
+      const pokeFav = state.PokeSinFiltro.filter(elem => elem.id === action.payload)
       return {
         ...state,
-        myFavorites: action.payload,
-        allCharactersFav: action.payload
+        myFavorites: [...state.myFavorites, ...pokeFav]
       };
-    // case AGREGAR: return {
-    //   ...state,
-    //   todos: [...state.todos, action.payload],
-    // };
-    // case REMOVE_FAV:
-    // const filter = state.allCharactersFav.filter((user) => user.id !== action.payload)
-    // const filter2 = state.myFavorites.filter((user) => user.id !== action.payload)
-    //esto es para que al sacar de fav mientras tenes filtro de genero aplicado funcione como deberia 
-    // return {
-    //     ...state,
-    //     myFavorites: filter2,
-    //     allCharactersFav: filter
-    //     // esto es para que se mantengan los cambios al cambiar genero en filtros
-    // }
+
     case REMOVE_FAV:
-      const filter2 = state.myFavorites.filter((user) => user.id !== action.pepi)
       return {
         ...state,
-        myFavorites: filter2,
-        allCharactersFav: action.payload
+        myFavorites: state.myFavorites.filter((user) => user.id !== action.payload)
       };
-    
+
 
     default: return {
       ...state

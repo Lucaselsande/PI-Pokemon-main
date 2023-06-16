@@ -1,6 +1,6 @@
 import './App.css';
 import NavBar from './components/NavBar/NavBar';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Deatil from './components/Detail/Deatil';
 import About from './components/about/about';
 import Cards from './components/Cards/Cards';
@@ -20,7 +20,6 @@ function App() {
    
    const local = useLocation()
    const dispatch = useDispatch()
-
 
 
    // 2 favoritos, poner bien el reducer 
@@ -47,6 +46,7 @@ function App() {
                <Route path=':id' element={<Deatil />} />
             </Route>
             <Route path="/favorites" element={<Favorites />} />
+            <Route path="*" element={<Navigate to="/" />} />
          </Routes>
       </div>
 

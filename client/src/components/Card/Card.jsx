@@ -1,15 +1,16 @@
 import style from './Card.module.css'
 import { Link } from 'react-router-dom';
 import { addFav, destroy, removeFav } from '../../redux/actions';
-import { connect, useDispatch } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 
 
 
-const Card = ({id,name,height,image,thumbnailImage,hp,attack,defense,specialAttack,specialDefense,speed,weight, onClose,types, addFav, removeFav, myFavorites }) => {
+const Card = ({id,name,height,image,thumbnailImage,hp,attack,defense,specialAttack,specialDefense,speed,weight, onClose,types, addFav, removeFav }) => {
 
    const [isFav, setisFav] = useState(false)
    const [destroyPokemon, setdestroy] = useState(false)
+   const myFavorites = useSelector(state => state.myFavorites)
 
    const dispatch = useDispatch()
 
@@ -23,7 +24,6 @@ const Card = ({id,name,height,image,thumbnailImage,hp,attack,defense,specialAtta
       }
 
    },[id])
-
    const handleFavorite = () => {
       if (isFav) {
          setisFav(false)
@@ -31,22 +31,21 @@ const Card = ({id,name,height,image,thumbnailImage,hp,attack,defense,specialAtta
 
       } else {
          setisFav(true)
-         addFav({ id, name, image })
+         addFav(id)
       }
-
    }
 
    const handleDestroy = () => {
       dispatch(destroy(id))
    }
-
-   // useEffect(() => {
-   //    myFavorites?.forEach((fav) => {
-   //       if (fav.id === id) {
-   //          setisFav(true);
-   //       }
-   //    });
-   // }, [myFavorites]);
+   
+   useEffect(() => {
+      myFavorites?.forEach((fav) => {
+         if (fav.id === id) {
+            setisFav(true);
+         }
+      });
+   }, [myFavorites]);
 
    return (
       <div key={id} className={style.card}>
@@ -58,7 +57,7 @@ const Card = ({id,name,height,image,thumbnailImage,hp,attack,defense,specialAtta
             )
          }
          {onClose&&<button onClick={() => { onClose(id) }}>Close</button>}
-         {destroyPokemon&& <button onClick={handleDestroy} >DESTROY</button>}
+         {destroyPokemon&& <button onClick={handleDestroy} >☢DESTROY</button>}
          <Link to={`/deatil/${id}`}>
             <img src={image} alt='' className={style['card-image']} />
          </Link>
@@ -87,7 +86,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
    return {
-      addFav: (character) => dispatch(addFav(character)),
+      addFav: (id) => dispatch(addFav(id)),
       removeFav: (id) => dispatch(removeFav(id))
    }
 }
