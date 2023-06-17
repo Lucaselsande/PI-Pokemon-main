@@ -21,7 +21,7 @@ const Deatil = () => {
             });
             return setPokemon({})
         } catch (error) {
-            window.alert('No hay pokemon con ese ID')
+            window.alert(error.message)
         }
         
         ;
