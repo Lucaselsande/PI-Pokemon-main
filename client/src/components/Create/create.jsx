@@ -6,6 +6,7 @@ import { crearPokemon, createNumberTypes } from "../../redux/actions"
 import validationStats from "../../validations/validationStats"
 import validationTypes from "../../validations/validationTypes"
 import { useNavigate } from "react-router-dom";
+import styles from './createStyle.module.css'
 
 
 const Create = () => {
@@ -110,107 +111,109 @@ const Create = () => {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <form onSubmit={handleSubmit}>
+        <div className={styles.formGroup}>
 
-        <label>Name: </label>
-        <input type="text" name="name" onChange={handlechange} />
-        {<p>{statsErr ? statsErr[0] : ''}</p>}
+          <label>Name: </label>
+          <input type="text" name="name" onChange={handlechange} />
+          {<p>{statsErr ? statsErr[0] : ''}</p>}
 
-        <div>
-          <label>height: </label>
-          <input type="range" name="height" min="1" max="150" onChange={handlechange} />
-          {pokemon.height}
-          <p>{statsErr ? statsErr[1] : ''}</p>
+          <div>
+            <label>height: </label>
+            <input type="range" name="height" min="1" max="150" onChange={handlechange} />
+            {pokemon.height}
+            <p>{statsErr ? statsErr[1] : ''}</p>
 
-        </div>
+          </div>
 
-        <div>
-          <label>hp: </label>
-          <input type="range" name="hp" min="1" max="150" onChange={handlechange} />
-          {pokemon.hp}
-          <p>{statsErr ? statsErr[2] : ''}</p>
-        </div>
+          <div>
+            <label>hp: </label>
+            <input type="range" name="hp" min="1" max="150" onChange={handlechange} />
+            {pokemon.hp}
+            <p>{statsErr ? statsErr[2] : ''}</p>
+          </div>
 
-        <div>
-          <label>attack: </label>
-          <input type="range" name="attack" min="1" max="150" onChange={handlechange} />
-          {pokemon.attack}
-          <p>{statsErr ? statsErr[3] : ''}</p>
-        </div>
+          <div>
+            <label>attack: </label>
+            <input type="range" name="attack" min="1" max="150" onChange={handlechange} />
+            {pokemon.attack}
+            <p>{statsErr ? statsErr[3] : ''}</p>
+          </div>
 
-        <div>
-          <label>defense: </label>
-          <input type="range" name="defense" min="1" max="150" onChange={handlechange} />
-          {pokemon.defense}
-          <p>{statsErr ? statsErr[4] : ''}</p>
-        </div>
+          <div>
+            <label>defense: </label>
+            <input type="range" name="defense" min="1" max="150" onChange={handlechange} />
+            {pokemon.defense}
+            <p>{statsErr ? statsErr[4] : ''}</p>
+          </div>
 
-        <div>
-          <label>specialAttack: </label>
-          <input type="range" name="specialAttack" min="1" max="150" onChange={handlechange} />
-          {pokemon.specialAttack}
-          <p>{statsErr ? statsErr[5] : ''}</p>
-        </div>
+          <div>
+            <label>specialAttack: </label>
+            <input type="range" name="specialAttack" min="1" max="150" onChange={handlechange} />
+            {pokemon.specialAttack}
+            <p>{statsErr ? statsErr[5] : ''}</p>
+          </div>
 
-        <div>
-          <label>specialDefense: </label>
-          <input type="range" name="specialDefense" min="1" max="150" onChange={handlechange} />
-          {pokemon.specialDefense}
-          <p>{statsErr ? statsErr[6] : ''}</p>
-        </div>
+          <div>
+            <label>specialDefense: </label>
+            <input type="range" name="specialDefense" min="1" max="150" onChange={handlechange} />
+            {pokemon.specialDefense}
+            <p>{statsErr ? statsErr[6] : ''}</p>
+          </div>
 
-        <div>
-          <label>speed: </label>
-          <input type="range" name="speed" min="1" max="150" onChange={handlechange} />
-          {pokemon.speed}
-          <p>{statsErr ? statsErr[7] : ''}</p>
-        </div>
+          <div>
+            <label>speed: </label>
+            <input type="range" name="speed" min="1" max="150" onChange={handlechange} />
+            {pokemon.speed}
+            <p>{statsErr ? statsErr[7] : ''}</p>
+          </div>
 
-        <div>
-          <label>weight: </label>
-          <input type="range" name="weight" min="1" max="150" onChange={handlechange} />
-          {pokemon.weight}
-          <p>{statsErr ? statsErr[8] : ''}</p>
-        </div>
+          <div>
+            <label>weight: </label>
+            <input type="range" name="weight" min="1" max="150" onChange={handlechange} />
+            {pokemon.weight}
+            <p>{statsErr ? statsErr[8] : ''}</p>
+          </div>
 
-        <div>
-          Types:
-          <select name='numberTypes' onChange={handleNumberTypes}>
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
-            <option value={4}>4</option>
-          </select>
+          <div>
+            Types:
+            <select name='numberTypes' onChange={handleNumberTypes}>
+              <option value={1}>1</option>
+              <option value={2}>2</option>
+              <option value={3}>3</option>
+              <option value={4}>4</option>
+            </select>
 
-          {// muestro la cantidad de selectores de types que yo quiera
-            selectedNumber.map(elem => {
+            {// muestro la cantidad de selectores de types que yo quiera
+              selectedNumber.map(elem => {
 
-              return (
-                <div key={elem}>
-                  <select name={aux++} onChange={handlechange}>
-                    <option value='type'>undefined</option>
-                    {// muestro todos los types de pokemons
-                      allTypes.map(elem => {
-                        return (
-                          <option key={elem} value={elem}>{elem}</option>
-                        )
-                      })
-                    }
-                  </select>
-                </div>
+                return (
+                  <div key={elem}>
+                    <select name={aux++} onChange={handlechange}>
+                      <option value='type'>undefined</option>
+                      {// muestro todos los types de pokemons
+                        allTypes.map(elem => {
+                          return (
+                            <option key={elem} value={elem}>{elem}</option>
+                          )
+                        })
+                      }
+                    </select>
+                  </div>
+                )
+              }
               )
             }
-            )
-          }
-          {
-          // si hay errores los muestro
-          }
-          <p>{typeErr[0] && typeErr[0]}</p>
-          <p>{typeErr[1] && typeErr[1]}</p>
-          <p>{typeErr[2] && typeErr[2]}</p>
-          <p>{typeErr[3] && typeErr[3]}</p>
+            {
+              // si hay errores los muestro
+            }
+            <p>{typeErr[0] && typeErr[0]}</p>
+            <p>{typeErr[1] && typeErr[1]}</p>
+            <p>{typeErr[2] && typeErr[2]}</p>
+            <p>{typeErr[3] && typeErr[3]}</p>
 
+          </div>
         </div>
 
         <button type="submit" >Crear pokemon</button>

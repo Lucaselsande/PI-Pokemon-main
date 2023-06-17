@@ -1,41 +1,54 @@
 .cards {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 10px;
-    max-width: 800px; /* Establece el ancho máximo del contenedor */
-    margin: 0 auto; /* Centra el contenedor horizontalmente */
-    padding: 20px; /* Añade un poco de espacio interno al contenedor */
-    
-  }
-  
-  .buttons {
-    display: flex;
-    flex-wrap: wrap; /* Para que los botones se ajusten automáticamente a la siguiente línea */
-    justify-content: center; /* Para centrar los botones horizontalmente */
-    margin-top: 1%;
-  }
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  color: white;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1%;
+
+}
 
 
-  .paginationButton {
-    padding: 5px 10px;
-    margin: 0 5px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 100px; /* Aumenta el valor para hacerlos más redondos */
-    cursor: pointer;
-  }
-  
-  
-  .disabledPaginationButton {
-    padding: 5px 10px;
-    margin: 0 5px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 20px; /* Aumenta el valor para hacerlos más redondos */
-    cursor: not-allowed;
-    opacity: 0.5;
-  }
-  
-  .paginationButton:hover {
-      background-color: #ccc;
-    }
+.paginationButton {
+  padding: 5px 10px;
+  margin: 0 5px;
+  background-color: #b8b4b4;
+  border: 1px solid #858383;
+  border-radius: 50px;
+  cursor: pointer;
+  background-color: #070707e5;
+  color: white;
+}
+
+
+.disabledPaginationButton {
+  padding: 5px 10px;
+  margin: 0 5px;
+  background-color: #070707e5;
+  color: white;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.paginationButton:hover {
+  background-color: #413f3f;
+}
+
+.container {
+  display: flex;
+}
+
+.filterContainer {
+  color: white;
+  margin-left: 20px; /* Cambiado a margin-left para que el .filterContainer esté a la izquierda */
+}

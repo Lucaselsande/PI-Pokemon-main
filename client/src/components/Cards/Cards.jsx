@@ -33,7 +33,7 @@ export default function Cards() {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-  
+
   const onClose = (id) => {
     dispatch(removePokemon(id))
   };
@@ -42,45 +42,50 @@ export default function Cards() {
     <div >
       <div className={style.buttons}>
         <button
-  className={currentPage === 1 ? style.disabledPaginationButton : style.paginationButton}
-  onClick={() => handlePageChange(currentPage - 1)}
-  disabled={currentPage === 1}
->
-  {'<'}
-</button>
+          className={currentPage === 1 ? style.disabledPaginationButton : style.paginationButton}
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          {'<'}
+        </button>
 
-{pageNumbers.map((pageNumber) => (
-  <button
-    key={pageNumber}
-    className={pageNumber === currentPage ? style.activePaginationButton : style.paginationButton}
-    onClick={() => handlePageChange(pageNumber)}
-  >
-    {pageNumber}
-  </button>
-))}
+        {pageNumbers.map((pageNumber) => (
+          <button
+            key={pageNumber}
+            className={pageNumber === currentPage ? style.activePaginationButton : style.paginationButton}
+            onClick={() => handlePageChange(pageNumber)}
+          >
+            {pageNumber}
+          </button>
+        ))}
 
-<button
-  className={currentPage === pageNumbers[pageNumbers.length - 1] ? style.disabledPaginationButton : style.paginationButton}
-  onClick={() => handlePageChange(currentPage + 1)}
-  disabled={currentPage === pageNumbers[pageNumbers.length - 1]}
->
-  {'>'}
-</button>
+        <button
+          className={currentPage === pageNumbers[pageNumbers.length - 1] ? style.disabledPaginationButton : style.paginationButton}
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === pageNumbers[pageNumbers.length - 1]}
+        >
+          {'>'}
+        </button>
       </div>
 
-      <Filter/>
-      
+
+      <div className={style.container}>
+        <div className={style.filterContainer}>
+          <Filter />
+        </div>
+      </div>
+
       <div className={style.cards}>
-{itemsToShow?.map(({ id, name, image, types }) => (
-        <Card
-          key={id}
-          id={id}
-          name={name}
-          image={image}
-          types={types.join(', ')}
-          onClose={onClose}
-        />
-      ))}
+        {itemsToShow?.map(({ id, name, image, types }) => (
+          <Card
+            key={id}
+            id={id}
+            name={name}
+            image={image}
+            types={types.join(', ')}
+            onClose={onClose}
+          />
+        ))}
       </div>
     </div>
   );

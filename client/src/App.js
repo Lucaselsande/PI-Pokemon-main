@@ -4,7 +4,7 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Deatil from './components/Detail/Deatil';
 import About from './components/about/about';
 import Cards from './components/Cards/Cards';
-import Form from './components/Form/Form';
+import Form from './components/LandingPage/LandingPage';
 import { useEffect } from 'react';
 import Favorites from './components/Favorites/Favorites';
 import Create from './components/Create/create';
