@@ -38,6 +38,12 @@ export default function Cards() {
     dispatch(removePokemon(id))
   };
 
+  useEffect(() => {
+    if(totalPages < currentPage){
+      setCurrentPage(1)
+    }
+ }, [totalPages]);
+
   return (
     <div >
       <div className={style.buttons}>
