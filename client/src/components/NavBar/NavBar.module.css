@@ -1,31 +1,35 @@
 .buttonBar {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 10px;
-    margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 
-  }
-  
-  .button {
-    padding: 10px 20px;
-    background-color: #070707e5;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-  }
-  
-  .link {
-    text-decoration: none;
-  }
-  
-  .navLink {
-    text-decoration: none;
-    color: #333;
-  }
-  
-  .navLink.active {
-    font-weight: bold;
-  }
-  
+}
+
+.button {
+  padding: 10px 20px;
+  background-color: #070707e5;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.navLink {
+  text-decoration: none;
+  color: #333;
+}
+
+.navLink.active {
+  font-weight: bold;
+}
+
+.icon {
+  max-width: 50px;
+  height: auto;
+}
