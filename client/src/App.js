@@ -10,6 +10,7 @@ import Create from './components/Create/create';
 import SearchBar from './components/SearchBar/SearchBar';
 import { allPokemons, allTypes } from './redux/actions';
 import { useDispatch } from 'react-redux';
+import Modify from './components/ModifyPokemon/modifyPokemon';
 
 function App() {
    
@@ -39,6 +40,7 @@ function App() {
             <Route path='/deatil' element={<Deatil />}>
                <Route path=':id' element={<Deatil />} />
             </Route>
+            <Route path='/modify' element={<Modify />} />
             <Route path="/favorites" element={<Favorites />} />
             <Route path="*" element={<Navigate to="/" />} />
          </Routes>

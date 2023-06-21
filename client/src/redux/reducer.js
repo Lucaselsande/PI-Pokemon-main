@@ -1,4 +1,4 @@
-import { ADD_FAV, REMOVE_FAV, FILTER, ALL_POKEMONS, REMOVE_POKEMON, POKE_NAME, ALL_TYPES, NUMBER_TYPES } from "./actions-type";
+import { ADD_FAV, REMOVE_FAV, FILTER,DB_POKEMONS, ALL_POKEMONS, REMOVE_POKEMON, POKE_NAME, ALL_TYPES, NUMBER_TYPES } from "./actions-type";
 
 
 
@@ -8,6 +8,7 @@ const initialState = {
   allTypes: [], 
   myFavorites: [],
   numberTypes: 1, // lo utilizo para actualizar una parte de los formularios de creacion 
+  pokemonsdb: []
 }
 
 
@@ -95,6 +96,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         myFavorites: state.myFavorites.filter((user) => user.id !== action.payload)
       };
+
+      case DB_POKEMONS:
+        return {
+          ...state,
+          pokemonsdb: state.PokeSinFiltro.filter(elem => typeof elem.id === 'string')
+        }
 
 
     default: return {

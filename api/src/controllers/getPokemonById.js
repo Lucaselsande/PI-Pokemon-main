@@ -17,7 +17,6 @@ const getPokemonById = async (req, res) => {
                 attributes: []
               }
             }})
-            console.log('id')
             //esto quita el .name de types y lo deja mas ordenado
           // const formattedPokemons = dbPokemon.map(pokemon => ({
           //   ...pokemon.toJSON(),
@@ -31,13 +30,13 @@ const getPokemonById = async (req, res) => {
         }
     
         const response = await axios.get(`${URL}${id}`)
-        if(response){
+        if(Object.keys(response).length){
           const pokemonFound = pokemonalldata(response)//aca mando la response para que la funcion me filtre lo que es necesario 
         return res.status(200).json(pokemonFound)
         }
-        return res.status(400).send(`No existe pokemon con id ${id}`)
+        throw new Error(`No existe pokemon con id ${id}`)
     } catch (error) {
-        res.status(403).send(error.message)
+       return res.status(403).json({error:`No existe pokemon con ese id`})
     }
 }
 

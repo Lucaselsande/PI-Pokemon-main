@@ -28,26 +28,25 @@ const getPokemonByName = async (req, res) => {
         const dbPokemonsFound = await pokemon.findAll({
             where: {
                 name: { [Op.iLike]: `%${name}%` }//con esto le digo que puede haber espacios antes o despues del nombre
-            },include: {
+            }, include: {
                 model: type,
                 attributes: ["name"],
                 through: {
-                  attributes: []
-                }}
+                    attributes: []
+                }
+            }
         });
-        const formattedPokemons = dbPokemonsFound.map(pokemon => ({
+                const formattedPokemons = dbPokemonsFound.map(pokemon => ({
             ...pokemon.toJSON(),
             types: pokemon.types.map(type => type.name)
-          }));
+        }));
         //si encuantra pokemons en la api o en la db los muestra
-        if (allPokemonsData.length||dbPokemonsFound.length) return res.status(200).json([...allPokemonsData, ...formattedPokemons])
-        throw Error('ningun pokemon encontrado')
+        if (allPokemonsData.length || dbPokemonsFound.length) return res.status(200).json([...allPokemonsData, ...formattedPokemons])
+        throw new Error('ningun pokemon encontrado')
 
     } catch (error) {
-        res.status(402).send(error.message)
+       return res.status(404).json({ error: error.message }); // envio el mensaje de error en la respuesta
     }
-
-
 }
 
 module.exports = getPokemonByName

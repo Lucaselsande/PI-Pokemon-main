@@ -23,7 +23,6 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 });
-server.timeout = 30000;
 server.use('/', routes);
 
 

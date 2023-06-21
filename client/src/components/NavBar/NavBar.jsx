@@ -25,6 +25,10 @@ const NavBar = () => {
                 <button className={style.button}>CREAR</button>
             </NavLink>
 
+            <Link to='/modify' className={style.link}>
+                <button className={style.button}>Modify</button>
+            </Link>
+
             <a href="https://www.linkedin.com/in/lucas-sande-5a74b720b/" target="_blank">
                 <img src={linkedin} alt="icono-linkedin" className={style.icon} />
             </a>

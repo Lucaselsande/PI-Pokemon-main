@@ -1,28 +1,29 @@
-import { ADD_FAV, REMOVE_FAV, FILTER, AGREGAR, CREAR, POKE_NAME, ALL_POKEMONS, REMOVE_POKEMON, ALL_TYPES, NUMBER_TYPES } from "./actions-type";
+import { ADD_FAV, REMOVE_FAV, FILTER, DB_POKEMONS, CREAR, POKE_NAME, ALL_POKEMONS, REMOVE_POKEMON, ALL_TYPES, NUMBER_TYPES } from "./actions-type";
 import axios from "axios";
 
 
 // return {type: POKE_NAME, payload: name}
 export const SearchPokeName = (name) => {
    // si en el search no busco ningun pokemon muestro todos
-   if (!name) {
-      return ({
-         type: POKE_NAME,
-         payload: 'data',
-      });
-   }
+   
    // peticion al server para traer el pokemon
    try {
+      if (!name) {
+         return ({
+            type: POKE_NAME,
+            payload: 'data',
+         });
+      }
       const URL = 'http://localhost:3001/pokemon/?name=' + name;
       return async (dispatch) => {
-         const { data } = await axios.get(URL)
+         const response = await axios.get(URL)
          return dispatch({
             type: POKE_NAME,
-            payload: data,
+            payload: response.data,
          });
       };
    } catch (error) {
-      window.alert('Pokemon no encontrado')
+      alert(error.response.data.error)
    }
 };
 
@@ -82,7 +83,6 @@ export const crearPokemon = (pokemonData) => {
 };
 
 export const destroy = (id) => {
-   console.log(id)
    return async (dispatch) => {
       try {
          const { data } = await axios.delete(`http://localhost:3001/delete/${id}`);
@@ -107,4 +107,28 @@ export const removeFav = (id) => {
       type: REMOVE_FAV,
       payload: id,
    });
+};
+
+export const dbPokemons = () => {
+   return {
+      type: DB_POKEMONS
+   };
+};
+
+export const ModifyPoke = (data) => {
+   //me quede aca el data de abajo no va
+   return async () => {
+      try {
+         const response = await axios.put(`http://localhost:3001/modify/`,data);
+         //con la peticion elimino por completo el pokemon de la db y con el dispatch quito la carta
+         window.alert(response.data.message)
+      }catch (error) {
+         if (error.response) {
+           const errorMessage = error.response.data.message;
+           window.alert(errorMessage);
+         } else {
+           console.log(error.message);
+         }
+      }
+   };
 };

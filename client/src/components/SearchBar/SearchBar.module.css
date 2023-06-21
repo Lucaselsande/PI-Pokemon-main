@@ -16,8 +16,9 @@
   
   .searchButton {
     padding: 8px 12px;
-    background-color: #ccc;
-    border: none;
+    background-color: #070707e5;
+  color: white;
+  border: 1px solid #ccc;
     border-radius: 5px;
     cursor: pointer;
   }

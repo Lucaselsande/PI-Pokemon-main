@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import imagen from '../../imagen/imagen.jpg'
-import imagen2 from '../../imagen/imagen2.jpg'
 import { useDispatch, useSelector } from "react-redux"
 import { crearPokemon, createNumberTypes } from "../../redux/actions"
 import validationStats from "../../validations/validationStats"
