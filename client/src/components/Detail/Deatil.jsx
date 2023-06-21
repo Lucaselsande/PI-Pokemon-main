@@ -9,24 +9,39 @@ const Deatil = () => {
 
     //traigo el pokemon por id, podria modularizarlo
 
+    // useEffect(() => {
+    //     try {
+    //         axios(`http://localhost:3001/pokemon/${id}`)
+    //         .then(({ data }) => {
+    //             if (data) {
+    //                 setPokemon(data);
+    //             } else {
+    //                 window.alert('No hay pokemon con ese ID');
+    //             }
+    //         });
+    //         return setPokemon({})
+    //     } catch (error) {
+    //         window.alert(error.message)
+    //     }
+    // }, [id])
     useEffect(() => {
-        try {
-            axios(`http://localhost:3001/pokemon/${id}`)
-            .then(({ data }) => {
-                if (data.name) {
-                    setPokemon(data);
-                } else {
-                    window.alert('No hay pokemon con ese ID');
-                }
-            });
-            return setPokemon({})
-        } catch (error) {
-            window.alert(error.message)
-        }
-        
-        ;
-    }, [id])
-    
+        const getPokeById = async () => {
+           try {
+              const { data } = await axios.get(`http://localhost:3001/pokemon/${id}`);
+                 setPokemon(data);
+           } catch (error) {
+            console.log(error)
+              if (error.response && error.response.data && error.response.data.message) {
+                 window.alert(error.response.data.message);
+              } else {
+                 window.alert('Error: ' + error.message);
+              }
+           }
+        };
+        getPokeById()
+     }, [id]);
+     
+
     return (
         <div className={style.pokemonDetails}>
             <div className={style.textContainer}>

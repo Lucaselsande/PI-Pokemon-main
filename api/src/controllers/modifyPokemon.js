@@ -45,9 +45,7 @@ const modifyPokemon = async (req, res) => {
         );
 
         if (result[0] === 1) {
-            console.log(result)
             res.status(200).json({ message: 'Pokemon modificado exitosamente' });
-            // res.status(200).json({ message: 'Elemento modificado exitosamente' });
         } else {
             res.status(500).json({ message: 'Error al modificar el Pokemon' });
         }

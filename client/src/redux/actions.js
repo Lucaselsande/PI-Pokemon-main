@@ -4,59 +4,73 @@ import axios from "axios";
 
 // return {type: POKE_NAME, payload: name}
 export const SearchPokeName = (name) => {
-   // si en el search no busco ningun pokemon muestro todos
-   
-   // peticion al server para traer el pokemon
-   try {
-      if (!name) {
-         return ({
-            type: POKE_NAME,
-            payload: 'data',
-         });
-      }
-      const URL = 'http://localhost:3001/pokemon/?name=' + name;
-      return async (dispatch) => {
-         const response = await axios.get(URL)
-         return dispatch({
-            type: POKE_NAME,
-            payload: response.data,
-         });
-      };
-   } catch (error) {
-      alert(error.response.data.error)
+   if (!name) {
+     return {
+       type: POKE_NAME,
+       payload: 'data',
+     };
    }
-};
+ 
+   return async (dispatch) => {
+     try {
+       const URL = 'http://localhost:3001/pokemon/?name=' + name;
+       const response = await axios.get(URL);
+       return dispatch({
+         type: POKE_NAME,
+         payload: response.data,
+       });
+     } catch (error) {
+       if (error.response && error.response.data && error.response.data.message) {
+         let errorMessage = error.response.data.message;
+         window.alert(errorMessage);
+       } else {
+         window.alert('Error: '+ error.message);
+       }
+     }
+   };
+ };
+ 
 
-export const allPokemons = () => {
-   try {
+ export const allPokemons = () => {
       const URL = 'http://localhost:3001/pokemon';
       return async (dispatch) => {
-         const { data } = await axios.get(URL)
-         return dispatch({
-            type: ALL_POKEMONS,
-            payload: data,
-         });
+         try {
+            const { data } = await axios.get(URL);
+            return dispatch({
+               type: ALL_POKEMONS,
+               payload: data,
+            });
+         } catch (error) {
+            if (error.response && error.response.data && error.response.data.message) {
+               const errorMessage = error.response.data.message;
+               window.alert(errorMessage);
+            } else {
+               window.alert('Error: ' + error.message);
+            }
+         }
       };
-   } catch (error) {
-      window.alert('Error con el server')
-   }
 };
 
+
 export const allTypes = () => {
-   try {
-      const URL = 'http://localhost:3001/types';
-      return async (dispatch) => {
-         const { data } = await axios.get(URL)
+   const URL = 'http://localhost:3001/types';
+   return async (dispatch) => {
+      try {
+      const { data } = await axios.get(URL)
          return dispatch({
             type: ALL_TYPES,
             payload: data,
          });
          ;
-      };
-   } catch (error) {
-      window.alert('Error con el server')
-   }
-
+      } catch (error) {
+         if (error.response && error.response.data && error.response.data.message) {
+            const errorMessage = error.response.data.message;
+            window.alert(errorMessage);
+         } else {
+            window.alert('Error: ' + error.message);
+         }
+      }
+   };
 };
 
 export const removePokemon = (id) => {
@@ -77,7 +91,12 @@ export const crearPokemon = (pokemonData) => {
          const { data } = await axios.post('http://localhost:3001/pokemon/', pokemonData);
          return dispatch(allPokemons());
       } catch (error) {
-         console.log(error.message);
+         if (error.response && error.response.data && error.response.data.message) {
+            const errorMessage = error.response.data.message;
+            window.alert(errorMessage);
+         } else {
+            window.alert('Error: ' + error.message);
+         }
       }
    };
 };
@@ -90,7 +109,12 @@ export const destroy = (id) => {
          dispatch(removePokemon(id))
          window.alert('Pokemon destruido definitivamente ')
       } catch (error) {
-         console.log(error.message);
+         if (error.response && error.response.data && error.response.data.message) {
+            const errorMessage = error.response.data.message;
+            window.alert(errorMessage);
+         } else {
+            window.alert('Error: ' + error.message);
+         }
       }
    };
 };
@@ -123,11 +147,11 @@ export const ModifyPoke = (data) => {
          //con la peticion elimino por completo el pokemon de la db y con el dispatch quito la carta
          window.alert(response.data.message)
       }catch (error) {
-         if (error.response) {
-           const errorMessage = error.response.data.message;
-           window.alert(errorMessage);
+         if (error.response && error.response.data && error.response.data.message) {
+            const errorMessage = error.response.data.message;
+            window.alert(errorMessage);
          } else {
-           console.log(error.message);
+            window.alert('Error: ' + error.message);
          }
       }
    };

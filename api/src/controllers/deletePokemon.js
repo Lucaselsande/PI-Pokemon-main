@@ -6,10 +6,12 @@ const deletePokemon = async (req, res) => {
     const {id} = req.params
     //si pones destroy solo, elimina todo en la db
     const deleted = await pokemon.destroy({where:{id}})
-    res.status(200).send('Pokemon eliminado correctamente')
-   
+        console.log(deleted)
+    if(deleted === 1) return res.status(200).send('Pokemon eliminado correctamente')
+    return res.status(400).json({ message: `Error al eliminar el Pokemon || Error: ${error.message}`})
+    
     } catch (error) {
-        res.status(402).send(error.message)
+        res.status(400).json({ message: `Error al eliminar el Pokemon || Error: ${error.message}`})
     }
 }
 

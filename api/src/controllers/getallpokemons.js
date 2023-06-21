@@ -34,11 +34,13 @@ const getAllPokemons = async (req, res) => {
                 types: pokemon.types.map(type => type.name)
               }));
         
+        if(!allPokemonsData)return res.status(403).json({ message: 'No se encuentran pokemons en la API'})
         return res.status(200).json([...allPokemonsData,...formattedPokemons])  
         
           
     } catch (error) {
-        res.status(402).send(error.message)
+        res.status(402).json({ message: `Error al traer Pokemons || Error: ${error.message}`})
+        // throw Error({ message: 'Error con la API', error })
     }
         
     

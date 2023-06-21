@@ -14,6 +14,7 @@ const Create = () => {
   const dispatch = useDispatch()
   const allTypes = useSelector(state => state.allTypes)
   const numberTypes = useSelector(state => state.numberTypes)
+  const allPokemons = useSelector(state => state.PokeSinFiltro)
 
   // declaro la cantidad maxima de types por pokemon
   const numberOfTypes = [1, 2, 3, 4]
@@ -63,7 +64,7 @@ const Create = () => {
   useEffect(() => {
     //valido typ siempre que se actualizan sus valores
     let { errors, arrayTypes } = validationTypes(typ)
-    suma = arrayTypes
+    // suma = arrayTypes
     setTypeErr(errors)
     setpokemon({
       ...pokemon,
@@ -73,7 +74,7 @@ const Create = () => {
 
   useEffect(() => {
     // valido los stats del pokemon siempre que cambien
-    setStatsErr(validationStats(pokemon))
+    setStatsErr(validationStats(pokemon,allPokemons))
   }, [pokemon])
 
   useEffect(() => {

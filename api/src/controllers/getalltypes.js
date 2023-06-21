@@ -17,7 +17,7 @@ const getAllTypes = async (req, res) => {
         res.status(200).send(allTypes)
    
     } catch (error) {
-        res.status(404).send(error.message)
+        res.status(404).json({ message: `Error al traer Types || Error: ${error.message}`})
     }
 }
 
