@@ -9,21 +9,6 @@ const Deatil = () => {
 
     //traigo el pokemon por id, podria modularizarlo
 
-    // useEffect(() => {
-    //     try {
-    //         axios(`http://localhost:3001/pokemon/${id}`)
-    //         .then(({ data }) => {
-    //             if (data) {
-    //                 setPokemon(data);
-    //             } else {
-    //                 window.alert('No hay pokemon con ese ID');
-    //             }
-    //         });
-    //         return setPokemon({})
-    //     } catch (error) {
-    //         window.alert(error.message)
-    //     }
-    // }, [id])
     useEffect(() => {
         const getPokeById = async () => {
            try {

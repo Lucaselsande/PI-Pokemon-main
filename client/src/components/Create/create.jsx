@@ -21,7 +21,6 @@ const Create = () => {
   // asigno la cantidad de types que yo quiera
   let selectedNumber = numberOfTypes.slice(0, numberTypes)
   let aux = 1
-  let suma = 1
 
   const [pokemon, setpokemon] = useState({
     name: "",
@@ -90,6 +89,10 @@ const Create = () => {
 
   }, [statsErr, typeErr])
 
+  useEffect(() => {
+    dispatch(createNumberTypes(1))
+  }, [])
+
   const handleNumberTypes = (event) => {
     // a esto le hice un dispatch para que se actualize, trate de hacerlo con un useEfect pero no me fue bien
     dispatch(createNumberTypes(event.target.value))
@@ -129,10 +132,15 @@ const Create = () => {
 
           <div>
             <label>hp: </label>
+            <input type="text" name="hp" onChange={handlechange} />
+            <p>{statsErr ? statsErr[2] : ''}</p>
+          </div>
+          {/* <div>
+            <label>hp: </label>
             <input type="range" name="hp" min="1" max="150" onChange={handlechange} />
             {pokemon.hp}
             <p>{statsErr ? statsErr[2] : ''}</p>
-          </div>
+          </div> */}
 
           <div>
             <label>attack: </label>
@@ -191,7 +199,7 @@ const Create = () => {
                 return (
                   <div key={elem}>
                     <select name={aux++} onChange={handlechange}>
-                      <option value='type'>undefined</option>
+                      <option value='undefined'>undefined</option>
                       {// muestro todos los types de pokemons
                         allTypes.map(elem => {
                           return (

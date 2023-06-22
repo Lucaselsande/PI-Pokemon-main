@@ -1,10 +1,11 @@
 const validationTypes = (typ) => {
+  // console.log(typ)
   let arrayTypes = [];
   let errors = {};
 
   // básicamente me fijo que no se dupliquen 
   
-  if (typ[1] && typ[1] !== 'none') {
+  if (typ[1] && typ[1] !== 'undefined') {
     arrayTypes.push(typ[1]);
 
     if (typ[2] && typ[2] !== typ[1]) {
@@ -25,9 +26,13 @@ const validationTypes = (typ) => {
       errors[3] = `el tipo ${typ[4]} está duplicado`;
     }
   } else {
-    errors[0] = `tipo ${typ[1]} no válido`;
+    //aca lo que hago es diferenciar si es creara o modificar, al ser modificar no hace falta agregar tipo
+    if(typeof typ[0] === 'number'){
+    }
+    else{
+      errors[0] = `tipo ${typ[1]} no válido`;
+    }
   }
-
   return { errors, arrayTypes }
 
 

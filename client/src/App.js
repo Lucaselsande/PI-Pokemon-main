@@ -18,9 +18,6 @@ function App() {
    const dispatch = useDispatch()
 
 
-   // 3 poner el icono de fav y el de cerrar en un mini form
-   // 5 deployear? no me aucuerdo como se escribe
-
    // uso el useEffect para llenar el estado global con lo que voy a necesitar
 
    useEffect(() => {
@@ -45,7 +42,6 @@ function App() {
             <Route path="*" element={<Navigate to="/" />} />
          </Routes>
       </div>
-
    );
 }
 

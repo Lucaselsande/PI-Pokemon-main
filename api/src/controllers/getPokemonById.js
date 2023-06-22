@@ -22,7 +22,6 @@ const getPokemonById = async (req, res) => {
           }
         }
       })
-      console.log(dbPokemon)
       if(!dbPokemon) return res.status(404).json({ message: `No existe Pokemon con id ${id}` })
       //esto quita el .name de types y lo deja mas ordenado
 

@@ -7,9 +7,11 @@ const validationStats = ({ name, height, hp, attack, defense, specialAttack, spe
     if (name.length < 3) {
         statsErr[0] = '* mas caracteres'
     }
+
     if (name.length > 20) {
         statsErr[0] = '* muchos caracteres'
     }
+
     if (Number(name)) {
         statsErr[0] = 'name no puede ser unicamente numeros'
     }
@@ -33,22 +35,23 @@ const validationStats = ({ name, height, hp, attack, defense, specialAttack, spe
     if (defense < 1 || defense > 150) {
         statsErr[4] = 'defense no valido'
     }
+    
     if (specialAttack < 1 || specialAttack > 150) {
         statsErr[5] = 'specialAttack no valido'
-
     }
+
     if (specialDefense < 1 || specialDefense > 150) {
         statsErr[6] = 'specialDefense no valido'
-
     }
+
     if (speed < 1 || speed > 150) {
         statsErr[7] = 'speed no valido'
-
     }
+
     if (weight < 1 || weight > 150) {
         statsErr[8] = 'weight no valido'
-
     }
+
     return statsErr
 
 

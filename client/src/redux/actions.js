@@ -2,7 +2,6 @@ import { ADD_FAV, REMOVE_FAV, FILTER, DB_POKEMONS, CREAR, POKE_NAME, ALL_POKEMON
 import axios from "axios";
 
 
-// return {type: POKE_NAME, payload: name}
 export const SearchPokeName = (name) => {
    if (!name) {
      return {
@@ -139,12 +138,12 @@ export const dbPokemons = () => {
    };
 };
 
+
+
 export const ModifyPoke = (data) => {
-   //me quede aca el data de abajo no va
    return async () => {
       try {
          const response = await axios.put(`http://localhost:3001/modify/`,data);
-         //con la peticion elimino por completo el pokemon de la db y con el dispatch quito la carta
          window.alert(response.data.message)
       }catch (error) {
          if (error.response && error.response.data && error.response.data.message) {

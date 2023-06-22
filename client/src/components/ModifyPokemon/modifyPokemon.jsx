@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { ModifyPoke, dbPokemons } from "../../redux/actions"
 import style from './modifyPokemonStyle.module.css';
+import validationTypes from "../../validations/validationTypes";
+import validationStats from "../../validations/validationStats";
 
 
 
@@ -19,6 +21,8 @@ const ModifyPokemon = () => {
     const [dbId, setDbId] = useState(null);
     const [pokeFound, setPokeFound] = useState(null);
     const [dbModify, setDbModify] = useState({});
+    const [typeErr, setTypeErr] = useState({})
+
 
 
 
@@ -49,23 +53,24 @@ const ModifyPokemon = () => {
 
     const handleMultiple = (event) => {
         const option = event.target.options
-        const selectedValues = []
 
+        const selectedValues = [8]
         for (let i = 0; i < option.length; i++) {
             if (option[i].selected) {
                 selectedValues.push(option[i].value)
             }
         }
-        setDbModify({
-            ...dbModify,
-            types: selectedValues
-        })
+        if (selectedValues.length < 6) {
+            let { errors, arrayTypes } = validationTypes(selectedValues)
+            setTypeErr(errors)
+
+            setDbModify({
+                ...dbModify,
+                types: arrayTypes
+            })
+        }
     };
 
-    // useEffect(() => {
-    //     console.log(dbModify)
-
-    // }, [dbModify]);
 
     const handleSubmit = async (event) => {
         event.preventDefault()
@@ -113,6 +118,10 @@ const ModifyPokemon = () => {
                                     ))
                                 }
                             </select>
+                            <p>{typeErr[0] && typeErr[0]}</p>
+                            <p>{typeErr[1] && typeErr[1]}</p>
+                            <p>{typeErr[2] && typeErr[2]}</p>
+                            <p>{typeErr[3] && typeErr[3]}</p>
 
                         </div>)
                 }
