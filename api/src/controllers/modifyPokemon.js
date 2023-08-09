@@ -2,31 +2,32 @@ const { pokemon, type } = require('../db');
 const TYPE = type
 
 
-
 const modifyPokemon = async (req, res) => {
 
     const { id, name, types, height, hp, attack, defense, specialAttack, specialDefense, speed, weight, } = req.body;
     try {
-        const pokemonFound = await pokemon.findOne({where:{id},
+        const pokemonFound = await pokemon.findOne({
+            where: { id },
             include: {
-              model: type,
-              attributes: ["name"],
-              through: {
-                attributes: []
-              }
-            }})
+                model: type,
+                attributes: ["name"],
+                through: {
+                    attributes: []
+                }
+            }
+        })
 
         if (!pokemonFound) {
             return res.status(404).json({ message: 'Pokemon no encontrado' });
         }
-        if(types){
-            const removTypes = [...pokemonFound.toJSON().types.map(elem=>elem.name)];
-            const typesFound = await TYPE.findAll({where:{name:removTypes}})
-        await pokemonFound.removeTypes(typesFound)
-            const typesAdd = await TYPE.findAll({where:{name:types}})
-        await pokemonFound.addTypes(typesAdd)
+        if (types) {
+            const removTypes = [...pokemonFound.toJSON().types.map(elem => elem.name)];
+            const typesFound = await TYPE.findAll({ where: { name: removTypes } })
+            await pokemonFound.removeTypes(typesFound)
+            const typesAdd = await TYPE.findAll({ where: { name: types } })
+            await pokemonFound.addTypes(typesAdd)
         }
-        
+
 
 
         const nuevoNombre = name || pokemonFound.nombre;

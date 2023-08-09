@@ -2,8 +2,9 @@ import { ADD_FAV, REMOVE_FAV, FILTER, DB_POKEMONS, CREAR, POKE_NAME, ALL_POKEMON
 import axios from "axios";
 
 
-export const SearchPokeName = (name) => {
+export const SearchPokeName = (name,setError) => {
    if (!name) {
+      setError(false)
      return {
        type: POKE_NAME,
        payload: 'data',
@@ -14,6 +15,7 @@ export const SearchPokeName = (name) => {
      try {
        const URL = 'http://localhost:3001/pokemon/?name=' + name;
        const response = await axios.get(URL);
+       setError(false)
        return dispatch({
          type: POKE_NAME,
          payload: response.data,
@@ -21,7 +23,8 @@ export const SearchPokeName = (name) => {
      } catch (error) {
        if (error.response && error.response.data && error.response.data.message) {
          let errorMessage = error.response.data.message;
-         window.alert(errorMessage);
+         setError(errorMessage)
+         // window.alert(errorMessage);
        } else {
          window.alert('Error: '+ error.message);
        }

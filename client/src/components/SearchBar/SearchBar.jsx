@@ -1,5 +1,5 @@
 import style from './SearchBar.module.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from "react-redux"
 import { SearchPokeName } from '../../redux/actions';
 
@@ -8,19 +8,30 @@ const SearchBar = () => {
    const dispatch = useDispatch()
 
    const [name, setname] = useState('')
+   const [error, setError] = useState(false)
+
+
+   useEffect(()=>{
+      setError(false)
+   },[])
 
    const handleChange = (event) => {
       setname(event.target.value)
    };
    const handleClick = () => {
-      dispatch(SearchPokeName(name))
+      dispatch(SearchPokeName(name,setError))
    }
 
    return (
-      <div className={style.search}>
+      <div>
+         <div className={style.search}>
          <input type='search' className={style.searchInput} onChange={handleChange} value={name} placeholder="Search..." />
          <button className={style.searchButton} onClick={() => { handleClick(); setname('') }}>Search</button>
+
+      </div >
+         {error&&<h2 className={style.error}>{error}</h2>}
       </div>
+      
 
    );
 };

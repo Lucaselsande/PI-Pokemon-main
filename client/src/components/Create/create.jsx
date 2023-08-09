@@ -42,9 +42,6 @@ const Create = () => {
   const [statsErr, setStatsErr] = useState({})
   const [errors, setErrors] = useState('')
 
-
-
-
   const handlechange = (event) => {
     // pregunto si se puede convertir a numero por que el event.target.name de types es numero
     if (Number(event.target.name)) {
@@ -97,7 +94,6 @@ const Create = () => {
     // a esto le hice un dispatch para que se actualize, trate de hacerlo con un useEfect pero no me fue bien
     dispatch(createNumberTypes(event.target.value))
   }
-
 
   const handleSubmit = async (event) => {
     // si hay errores no se mandan los datos para crear
@@ -226,13 +222,7 @@ const Create = () => {
 
         <button type="submit" >Crear pokemon</button>
       </form>
-
-
-
     </div>
-
-
-
   )
 }
 export default Create;

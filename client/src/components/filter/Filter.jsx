@@ -10,7 +10,9 @@ const Filter = () => {
     const [filters, setFilter] = useState({
         Order: 'N',
         Filter: 'ALL',
-        Type: 'all'
+        Type: 'all',
+        min: 1,
+        max: 150,
     })
 
     const handlechange = (event) => {
@@ -19,6 +21,7 @@ const Filter = () => {
             [event.target.name]: event.target.value
         })
     }
+
 
     // el event.preventDefault para que no se actualize
     const handleSubmit = (event) => {
@@ -39,6 +42,16 @@ const Filter = () => {
                     <option value="Menor">Attack{'(-/+)'}</option>
                 </select>
             </div>
+
+            <div>
+            <label>Min hp: </label>
+            <input type="number" name="min" min="1" max="150" onChange={handlechange} />
+          </div>
+
+          <div>
+            <label>Max hp: </label>
+            <input type="number" name="max" min="1" max="150" onChange={handlechange} />
+          </div>
 
             <div>
                 {'Type '}
